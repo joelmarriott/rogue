@@ -13,7 +13,7 @@ class Window:
 
         Args:
             objects (list, optional): Object with image, position and
-            collision data. Must have a draw method. Defaults to [].
+                collision data. Must have a draw method. Defaults to [].
         """
         self.display.fill(pygame.Color(79,164,184))
         for object in objects:
