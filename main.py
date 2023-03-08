@@ -1,5 +1,6 @@
 import pygame
 from r_window import Window
+from r_world import WorldMap
 
 
 def main():
@@ -7,15 +8,17 @@ def main():
     window = Window()
     clock = pygame.time.Clock()
     
+    this_world = WorldMap('overworld', window)
+    
     run = True
     while run:
         clock.tick(30)
         events = pygame.event.get()
-        window.draw()
-        run = input(events, window)
+        window.draw([this_world])
+        run = input(events, window, this_world)
     
 
-def input(events, window):
+def input(events, window, this_world):
     """Handles all game input
 
     Args:
@@ -34,6 +37,9 @@ def input(events, window):
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_F11:
                 window.toggle_fullscreen()
+                display_info = pygame.display.Info()
+                this_world.pos_y = display_info.current_h / 2
+                this_world.world_map = this_world.construct_map('overworld', window)
             
     return run
 
